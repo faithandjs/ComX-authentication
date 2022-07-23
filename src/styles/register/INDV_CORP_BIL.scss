@@ -1,0 +1,29 @@
+@import '../mixin';
+@import '../colors';
+
+.names,
+.more {
+  @include flex($justify: space-between);
+}
+
+.number-box.input-box:last-child {
+  div {
+    @include flex($justify: space-between);
+
+    select {
+      width: calc(20% - 10px);
+    }
+    input {
+      width: calc(80% - 10px);
+    }
+  }
+}
+.extras {
+  text-align: start;
+  button {
+    padding: 7px 0;
+    font-size: .8rem;
+    display: block;
+    color: $grey;
+  }
+}

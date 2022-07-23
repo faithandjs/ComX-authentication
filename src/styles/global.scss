@@ -6,22 +6,45 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  color: $text;
 }
 body {
-  font-size: 10px;
   background-color: $bg;
 }
-button {
+button,
+input,
+select {
   background-color: unset;
   outline: 0;
   border: 0;
+}
+button {
+  font-weight: 700;
   &:hover {
     cursor: pointer;
   }
 }
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
 .btn-green {
   background-color: $btn_green;
+  color: #fff;
 }
 .btn-dark {
   background-color: $btn_dark;
+  color: #fff;
+}
+.btn-darker {
+  background-color: $btn_darker;
+  color: #fff;
+}
+.orange {
+  color: $orange;
+}
+.text3 {
+  color: $grey;
 }

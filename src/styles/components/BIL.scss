@@ -1,0 +1,75 @@
+@import '../colors';
+@import '../mixin';
+
+.bif-box {
+  max-width: 600px;
+  background-color: #fff;
+  margin: auto;
+  text-align: center;
+  padding: 35px;
+  h1 {
+    font-weight: 400;
+    font-size: 1.8rem;
+  }
+  h1,
+  p {
+    margin: 12px 0;
+  }
+  p {
+    font-size: 0.8rem;
+  }
+  .text1 {
+  }
+  .category {
+    padding: 25px 0;
+    text-align: start;
+    .text2 {
+    }
+    .btns {
+      button {
+        padding: 13px 30px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(128, 128, 128, 0.63);
+        border: 1px solid $grey_lines;
+        border-radius: 3px;
+        margin-right: 10px;
+        &.btn-darker {
+          border: 0;
+        }
+      }
+    }
+  }
+  input,
+  select {
+    border-radius: 3px;
+    border: 1px solid $grey_lines;
+    padding: 13px 10px;
+    width: 100%;
+  }
+  .steps {
+    margin-top: 30px;
+    font-weight: 500;
+
+    @include flex($justify: space-between);
+    &.center {
+      justify-content: center;
+    }
+  }
+}
+
+.input-box {
+  margin: 20px 0;
+  text-align: start;
+  position: relative;
+  label {
+    display: block;
+    padding: 9px 0;
+    font-size: .9rem;
+  }
+}
+.half-input-box {
+  width: calc(50% - 10px);
+}
+.full-input-box {
+  
+}

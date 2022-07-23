@@ -1,0 +1,68 @@
+@import './colors';
+@import './mixin';
+
+header.dashboard {
+  justify-content: unset;
+  .one,
+  .two {
+    border-right: 1px solid $grey_lines;
+    @include flex($justify: space-between, $align: unset);
+  }
+  .img-box {
+    @include flex;
+  }
+  .one {
+    width: 50%;
+    .img-box {
+      img {
+      }
+    }
+    .mode {
+      height: fit-content;
+      @include flex($justify: space-between);
+      background-color: $grey_lines;
+      padding: 4px 8px;
+      border-radius: 18px;
+      span {
+        padding-right: 5px;
+      }
+      .img-box {
+        height: 30px;
+        width: 30px;
+        background-color: #fff;
+        border-radius: 50%;
+        svg {
+          width: 20px;
+        }
+      }
+    }
+  }
+  .two {
+    width: 35%;
+    .img-box {
+      svg {
+      }
+    }
+    ul {
+      @include flex;
+      li {
+        span {
+          display: block;
+          white-space: nowrap;
+          &.text3 {
+          }
+          &:last-child {
+          }
+        }
+      }
+    }
+  }
+  .three {
+    @include flex($justify: flex-end);
+    width: 15%;
+    button {
+    }
+    .img-box {
+    }
+  }
+}

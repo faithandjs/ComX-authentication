@@ -1,0 +1,25 @@
+@import './mixin';
+
+.more {
+  .input-box.checkbox {
+    @include flex($justify: flex-start);
+    input {
+      width: max-content;
+      margin-right: 7px;
+    }
+    label{
+        font-size: .9rem;
+    }
+  }
+}
+.final {
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    &:last-child {
+      background-color: #F8FAFB;
+    }
+  }
+}

@@ -3,14 +3,16 @@
   justify-content: $justify;
   align-items: $align;
 }
-// @mixin rtl() {
-//     #{$property}: $ltr-value;
-
-//     [dir=rtl] & {
-//       #{$property}: $rtl-value;
-//     }
-//   }
-
-//   .sidebar {
-//     @include rtl(float, left, right);
-//   }
+@mixin position(
+  $position: absolute,
+  $top: unset,
+  $right: unset,
+  $bottom: unset,
+  $left: unset
+) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}

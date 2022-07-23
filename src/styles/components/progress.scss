@@ -1,0 +1,43 @@
+@import '../colors';
+@import '../mixin';
+.progress {
+  text-align: center;
+  margin: 70px 0 25px;
+  p {
+    padding-bottom: 30px;
+    span {
+      color: grey;
+    }
+  }
+  ul {
+    margin: auto;
+    @include flex($justify: space-between);
+    width: 420px;
+    li {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: $grey_lines;
+      &::after {
+        content: '';
+        background-color: $grey_lines;
+        width: 140px;
+        height: 3px;
+        @include position($top: 50%, $left: 0px);
+        transform: translate(0, -50%);
+      }
+      &:nth-child(4) {
+        &::after {
+          display: none;
+        }
+      }
+      &.finished {
+        background-color: $orange;
+        &::after {
+          background-color: $orange;
+        }
+      }
+    }
+  }
+}
