@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import './colors';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  font-size: 10px;
+  background-color: $bg;
+}
+button {
+  background-color: unset;
+  outline: 0;
+  border: 0;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.btn-green {
+  background-color: $btn_green;
+}
+.btn-dark {
+  background-color: $btn_dark;
+}
