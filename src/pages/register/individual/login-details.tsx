@@ -26,27 +26,21 @@ const LoginDetails = () => {
           />
         </div>
         <div className="input-box number-box">
-          <label htmlFor=" ">Phone Number</label>
-          <div>
-            <select
-              name="Country Code"
-              // id="type-of-business"
-            >
-              <option value="">a</option>
-              <option value="">b</option>
-              <option value="" defaultValue={'+234'}>
-                +234
-              </option>
-              <option value="">d</option>
-            </select>
-            <input
-              type="number"
-              // id="confirm-password"
-              name="Number"
-              placeholder="Enter your phone number"
-              required
-            />
-          </div>
+          <label htmlFor=" ">
+            Phone Number
+            <div>
+              <select name="Country Code" id="country-code">
+                <option value="+234">+234</option>
+              </select>
+              <input
+                type="number"
+                id="phone-number"
+                name="Phone Number"
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+          </label>
         </div>
       </>
     </BIL>

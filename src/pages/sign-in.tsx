@@ -10,7 +10,7 @@ const Signin = () => {
         <div className="text1">Enter your login credentials below.</div>
         <form action="">
           <div className="input-box">
-            <label htmlFor="user-email">Your Email</label>
+            <label htmlFor="user-email">Your Email</label>{' '}
             <input
               type="text"
               name="User Email"

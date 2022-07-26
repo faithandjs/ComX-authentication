@@ -29,10 +29,7 @@ const CorpBasicInfo = () => {
               <option disabled defaultValue="Select Type of Business" hidden>
                 Select Type of Business
               </option>
-              <option value="">a</option>
-              <option value="">b</option>
-              <option value="">c</option>
-              <option value="">d</option>
+              <option value="Agriculture">Agriculture</option>
             </select>
           </div>
           <div className="half-input-box input-box">

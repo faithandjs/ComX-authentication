@@ -10,14 +10,14 @@ const OtpValidation = () => {
       <>
         <div className="input-box">
           <label htmlFor="recovery-otp">
-            Enter the Email Address you registered with
+            Enter the 4-digit code that was sent to name@mymail.com
           </label>
           <input
             type="text"
             name="Recovery OTP"
             id="recovery-otp"
             placeholder="Enter code"
-            required
+            // required
           />
         </div>
         <button className="text3">Resend Code</button>

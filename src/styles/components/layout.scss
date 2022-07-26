@@ -2,66 +2,68 @@
 @import '../colors';
 header {
   @include flex;
-
-  img {
-    margin: 2rem auto 3rem;
-    width: 160px;
+  &.forms {
+    img {
+      margin: 2rem auto 3rem;
+      width: 160px;
+    }
   }
 }
 main {
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto auto  25px auto
 }
 footer {
-  width: 100%;
-  padding: 0 1rem 1.2rem;
   @include flex(flex-end);
-  .box {
-    position: relative;
-    margin-right: 1rem;
-    background-color: #fff;
-    white-space: nowrap;
-    font-size: 0.85rem;
-    padding: 10px 15px;
-    border: 1px solid #d71e0e;
-    border-radius: 18px;
-    &::before {
-      content: '';
-      background-color: rgb(255, 255, 255);
-      width: 3px;
-      height: 17px;
-      @include position($top: 50%, $right: -1px);
-      transform: translate(0, -50%);
-    }
-    &::after {
-      content: '';
-      z-index: -1;
-      background-color: rgb(255, 255, 255);
+  width: 100%;
+  &.forms {
+    padding: 0 1rem 1.2rem;
+    .box {
+      position: relative;
+      margin-right: 1rem;
+      background-color: #fff;
+      white-space: nowrap;
+      font-size: 0.85rem;
+      padding: 10px 15px;
       border: 1px solid #d71e0e;
-      width: 35px;
-      height: 35px;
-      @include position($top: 50%, $right: -3px);
-      transform: translate(0, -50%) rotate(45deg);
+      border-radius: 18px;
+      &::before {
+        content: '';
+        background-color: rgb(255, 255, 255);
+        width: 3px;
+        height: 17px;
+        @include position($top: 50%, $right: -1px);
+        transform: translate(0, -50%);
+      }
+      &::after {
+        content: '';
+        z-index: -1;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid #d71e0e;
+        width: 35px;
+        height: 35px;
+        @include position($top: 50%, $right: -3px);
+        transform: translate(0, -50%) rotate(45deg);
+      }
+      h3,
+      p {
+        margin: 2px;
+      }
+      h3 {
+        color: $text;
+      }
+      p {
+        color: #98a9bc;
+      }
     }
-    h3,
-    p {
-      margin: 2px;
-    }
-    h3 {
-      color: $text;
-    }
-    p {
-      color: #98a9bc;
-    }
-  }
-  button {
-    background-color: $orange;
-    width: 47px;
-    height: 47px;
-    border-radius: 50%;
+    button {
+      background-color: $orange;
+      width: 47px;
+      height: 47px;
+      border-radius: 50%;
 
-    img {
-      width: 26px;
+      img {
+        width: 26px;
+      }
     }
   }
 }

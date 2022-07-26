@@ -7,14 +7,16 @@
 }
 
 .number-box.input-box:last-child {
-  div {
-    @include flex($justify: space-between);
-
-    select {
-      width: calc(20% - 10px);
-    }
-    input {
-      width: calc(80% - 10px);
+  label {
+    div {
+      margin-top: 9px;
+      @include flex($justify: space-between);
+      select {
+        width: calc(20% - 10px);
+      }
+      input {
+        width: calc(80% - 10px);
+      }
     }
   }
 }
@@ -22,7 +24,7 @@
   text-align: start;
   button {
     padding: 7px 0;
-    font-size: .8rem;
+    font-size: 0.8rem;
     display: block;
     color: $grey;
   }
