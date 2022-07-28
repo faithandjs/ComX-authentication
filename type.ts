@@ -5,10 +5,17 @@ export enum typeOption {
 
 export interface BILProps {
   children: JSX.Element;
-  type?: typeOption;
-  nextLink: string;
-  prevLink?: string;
   level: 1 | 2 | 3 | 4;
+  type?: typeOption;
+}
+
+export interface formWrapper {
+  children: JSX.Element;
+  nextLink: string;
+  level: 1 | 2 | 3 | 4;
+  type?: typeOption;
+  obj: INDV_FF | CORP_FF | INDV_SF | CORP_SF;
+  canG0?: boolean;
 }
 export interface layoutProps {
   children: JSX.Element;
@@ -23,4 +30,39 @@ export interface cardProps {
   btnText: string;
   btnClass: string;
   to: string;
+}
+export interface INDV_FF {
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+export interface INDV_SF {
+  password: string;
+  auth_type: 'password';
+  referral_code: string;
+  phone: string;
+  occupation: 'Farmer';
+}
+
+export interface CORP_FF {
+  company_name: string;
+  nature_of_business: string;
+  date_of_incorporation: string;
+}
+export interface CORP_SF {
+  email: string;
+  password: string;
+  auth_type: 'password';
+  company_website: string;
+  rc_number: 3245463454;
+  company_phone: number;
+  referral_code: string;
+}
+export interface set {
+  value1: INDV_FF | CORP_FF;
+  value2: INDV_SF | CORP_SF;
+}
+export interface signin {
+  email: string;
+  pwrd: string;
 }

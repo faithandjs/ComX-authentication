@@ -6,7 +6,7 @@
   @include flex($justify: space-between);
 }
 
-.number-box.input-box:last-child {
+.number-box.input-box {
   label {
     div {
       margin-top: 9px;

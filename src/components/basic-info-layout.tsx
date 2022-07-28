@@ -3,8 +3,14 @@ import Layout from './layout';
 import ProgressLayout from './progress-layout';
 import { Link } from 'gatsby';
 import '../styles/components/BIL.scss';
+import useNewContext from '@/context/context';
 
-const BIL = ({ children, type, nextLink, prevLink, level }: BILProps) => {
+const BIL = ({
+  children,
+  type,
+  level,
+}: BILProps) => {
+  // const { setting, settingFinal } = useNewContext();
   return (
     <Layout>
       <ProgressLayout level={level}>
@@ -37,27 +43,39 @@ const BIL = ({ children, type, nextLink, prevLink, level }: BILProps) => {
           ) : (
             <></>
           )}
-          <form action="">{children}</form>
-          <div className={`steps ${level !== 3 ? 'center' : ''}`}>
-            {level === 3 ? (
-              <>
-                <Link to={prevLink ? prevLink : ''}>
-                  <button type="button">BACK</button>
-                </Link>
+            {children}
+            {/* <div className={`steps ${level !== 3 ? 'center' : ''}`}>
+              {level === 3 ? (
+                <>
+                  <Link to={prevLink ? prevLink : ''}>
+                    <button type="button">BACK</button>
+                  </Link>
+                  <Link to={nextLink}>
+                    <button type="submit" className="orange">
+                      FINISH
+                    </button>
+                  </Link>
+                </>
+              ) : level === 2 ? (
                 <Link to={nextLink}>
                   <button type="submit" className="orange">
-                    FINISH
+                    VERIFY ACCOUNT
                   </button>
                 </Link>
-              </>
-            ) : (
-              <Link to={nextLink}>
-                <button type="button" className="orange">
-                  NEXT STEP
-                </button>
-              </Link>
-            )}{' '}
-          </div>
+              ) : (
+                <Link to={nextLink}>
+                  <button
+                    type="button"
+                    className="orange"
+                    onClick={() => {
+                      setting(setKey, obj);
+                    }}
+                  >
+                    NEXT STEP'
+                  </button>
+                </Link>
+              )}
+            </div> */}
         </div>
       </ProgressLayout>
     </Layout>

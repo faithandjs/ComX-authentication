@@ -1,5 +1,5 @@
 import Layout from '../components/layout';
-import { Link } from 'gatsby';
+import { Link,navigate } from 'gatsby';
 import '../styles/sign-in.scss';
 
 const Signin = () => {
@@ -8,7 +8,10 @@ const Signin = () => {
       <div className="bif-box">
         <h1>Sign in to ComX</h1>
         <div className="text1">Enter your login credentials below.</div>
-        <form action="">
+        <form action="" onSubmit={(e)=>{
+          e.preventDefault()
+          navigate('/dashboard/market/order-book')
+        }}>
           <div className="input-box">
             <label htmlFor="user-email">Your Email</label>{' '}
             <input

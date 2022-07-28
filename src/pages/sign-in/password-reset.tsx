@@ -1,13 +1,14 @@
 import ResetPasswordLayout from '@/components/reset-password-layout';
-
+import { Link, navigate } from 'gatsby';
 const PasswordReset = () => {
   return (
-    <ResetPasswordLayout
-      level={1}
-      nextLink="/sign-in/password-reset/otp-validation"
-      prevLink="/sign-in"
-    >
-      <>
+    <ResetPasswordLayout>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          navigate('/sign-in/password-reset/otp-validation');
+        }}
+      >
         <div className="input-box">
           <label htmlFor="recovery-email">
             Enter the Email Address you registered with
@@ -23,7 +24,15 @@ const PasswordReset = () => {
         <p className="text3">
           Note that you'll be sent an OTP to the email address provided
         </p>
-      </>
+        <div className="steps">
+          <button>
+            <Link to="/sign-in">BACK</Link>
+          </button>
+          <button className="orange" type="submit">
+            FINISH
+          </button>
+        </div>
+      </form>
     </ResetPasswordLayout>
   );
 };

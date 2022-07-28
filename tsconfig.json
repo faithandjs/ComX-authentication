@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    // "allowJs": true,
+    // "noImplicitAny": false,
     "target": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": ["dom", "esnext", "DOM.Iterable"],
     "jsx": "react-jsx",
     "module": "esnext",
     "moduleResolution": "node",
@@ -16,5 +18,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*", "./__helpers__/*", "type.ts"]
+  "include": ["./src/**/*", "./__helpers__/*", "type.ts", "gatsby-browser.ts"]
 }
