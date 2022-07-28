@@ -20,7 +20,7 @@ const FormWrapper = ({
         e.preventDefault();
         level === 2 && setting({ value2: obj });
         handleSubmit(type);
-        if (canG0 !== false) navigate(nextLink);
+        // if (canG0 !== false) navigate(nextLink);
       }}
     >
       {children}

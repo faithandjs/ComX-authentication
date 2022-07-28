@@ -15,10 +15,11 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
 };
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-   resolve: {
+    resolve: {
       fallback: {
         crypto: require.resolve('crypto-browserify'),
       },
+      // fallback: { stream: require.resolve('stream-browserify') },
     },
-  })
-}
+  });
+};

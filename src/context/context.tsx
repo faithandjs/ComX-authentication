@@ -15,18 +15,12 @@ import {
   set,
   typeOption,
 } from 'type';
-import Manager from '../../encryption';
-// import Managerr from '../../encrypt'
+import { encrypt } from '../../encrypt';
 
-const manager = new Manager({
-  key: process.env.GATSBY_KEY,
-  vector: process.env.GATSBY_VECTOR,
-});
 const newContext = createContext<any>(null);
 const { Provider } = newContext;
 
 export const Context = ({ children }: layoutProps) => {
-  // require('dotenv').config();
   const [firstForm, setFF] = useState<INDV_FF | CORP_FF>();
   const [secondForm, setSF] = useState<INDV_SF | CORP_SF>();
   const [finalForm, setFinal] = useState<any>();
@@ -84,31 +78,33 @@ export const Context = ({ children }: layoutProps) => {
     form_data.append('referral_code', '');
     form_data.append('phone', '+2348054643230');
     form_data.append('occupation', 'Farmer');
-    manager.encrypt(form_data); // impure encryption
 
+    const data = encrypt(form_data);
+
+    return;
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
     headers.set(
       'Authorization',
       `Bearer ${
-        'password'
+        ''
         // sessionStorage.getItem("user.auth.token") ?? context.user?.token
       }`,
     );
 
     fetch(URL, {
       method: 'POST',
-      body: JSON.stringify(form_data),
+      body: data,
       headers,
     })
       .then((response) => response.json())
       .then((response) => {
-        manager.decrypt(response); // impure decryption
+        // manager.decrypt(response); // impure decryption
         console.log(response); // something intelligible
       });
   }
   // console.log(manager, 'manager', process.env.GATSBY_KEY,  process.env.NODE_ENV);
-  // console.log(finalForm, firstForm, secondForm); 
+  // console.log(finalForm, firstForm, secondForm);
   const value = useMemo(
     () => ({ setting, settingFinal, URL, finalForm, handleSubmit }),
     [],
