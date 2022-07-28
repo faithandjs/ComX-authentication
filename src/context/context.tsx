@@ -16,7 +16,7 @@ import {
   typeOption,
 } from 'type';
 import Manager from '../../encryption';
-// import Manager from '../../encrypt'
+// import Managerr from '../../encrypt'
 
 const manager = new Manager({
   key: process.env.GATSBY_KEY,
@@ -107,7 +107,7 @@ export const Context = ({ children }: layoutProps) => {
         console.log(response); // something intelligible
       });
   }
-  console.log(manager, 'manager', process.env.GATSBY_KEY, process.env.prop,  process.env.NODE_ENV);
+  // console.log(manager, 'manager', process.env.GATSBY_KEY,  process.env.NODE_ENV);
   // console.log(finalForm, firstForm, secondForm); 
   const value = useMemo(
     () => ({ setting, settingFinal, URL, finalForm, handleSubmit }),

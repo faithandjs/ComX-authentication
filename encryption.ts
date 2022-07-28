@@ -21,14 +21,12 @@ interface doEncryptData {
   formData?: FormData;
 }
 interface doDecryptData {
-  key?: any;
-  // t?: any;
-  vector?: any;
-  // r?: any;
+  key?: any; // t?: any;
+  vector?: any; // r?: any;
   data?: any;
 }
 function do_encrypt_data({ key, vector, formData }: doEncryptData) {
-  // console.log('data in encrypt', key, vector, formData);
+  console.log('data in encrypt', crypto.createCipheriv);
   function func(param: string) {
     let a = crypto.createCipheriv('aes-256-cbc', key, vector);
     return Buffer.concat([a.update(param), a.final()]).toString('base64');
