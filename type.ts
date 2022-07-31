@@ -2,20 +2,18 @@ export enum typeOption {
   IND = 'Individual',
   CORP = 'Corporate',
 }
-
 export interface BILProps {
   children: JSX.Element;
   level: 1 | 2 | 3 | 4;
   type?: typeOption;
 }
-
 export interface formWrapper {
   children: JSX.Element;
   nextLink: string;
   level: 1 | 2 | 3 | 4;
-  type?: typeOption;
+  type: typeOption;
   obj: INDV_FF | CORP_FF | INDV_SF | CORP_SF;
-  canG0?: boolean;
+  evalProps: personalEvalProp[] | (confirmPasswordProp | personalEvalProp)[];
 }
 export interface layoutProps {
   children: JSX.Element;
@@ -43,7 +41,6 @@ export interface INDV_SF {
   phone: string;
   occupation: 'Farmer';
 }
-
 export interface CORP_FF {
   company_name: string;
   nature_of_business: string;
@@ -64,5 +61,18 @@ export interface set {
 }
 export interface signin {
   email: string;
-  pwrd: string;
+  password: string;
+}
+export interface personalEvalProp {
+  selector: string;
+  name?: string;
+  select?: boolean;
+  alph?: boolean;
+  num?: boolean;
+  otp?: boolean
+}
+export interface confirmPasswordProp {
+  selector: null;
+  password_selector: string;
+  confirm_selector: string;
 }

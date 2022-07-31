@@ -2,9 +2,10 @@ import BIL from '@/components/basic-info-layout';
 import FormWrapper from '@/components/form-wrapper';
 import { useState, useEffect } from 'react';
 import { typeOption } from 'type';
+import { personalEval, confirmPassword } from '@/components/functions';
 
 const LoginDetails = () => {
-  const [number, setNUM] = useState('0');
+  const [number, setNUM] = useState<any>('');
   const [CC, setCC] = useState('');
   const [password, setPWD] = useState('');
   const [confirm_password, setCPWD] = useState('');
@@ -22,15 +23,28 @@ const LoginDetails = () => {
           occupation: 'Farmer',
           referral_code: '',
         }}
-        canG0={
-          password === confirm_password && password.length > 1 ? true : false
-        }
+        evalProps={[
+          { selector: '#PWD_INDV', name: 'Password' },
+          {
+            selector: null,
+            password_selector: '#PWD_INDV',
+            confirm_selector: '#CPWD_INDV',
+          },
+          {
+            selector: '#NUM',
+            name: 'Phone Number',
+            num: true,
+          },
+        ]}
       >
         <>
-          <div className="full-input-box input-box">
+          <div className="full-input-box input-box" id="PWD_INDV">
             <label htmlFor="password">Password</label>
             <input
-              onChange={(e) => setPWD(e.target.value)}
+              onChange={(e) => {
+                setPWD(e.target.value.trim());
+                personalEval({ selector: '#PWD_INDV', name: 'Password' });
+              }}
               value={password}
               type="password"
               id="password"
@@ -38,11 +52,19 @@ const LoginDetails = () => {
               placeholder="Enter your password"
               required
             />
+            <span>error msg</span>
           </div>
-          <div className="full-input-box input-box">
+          <div className="full-input-box input-box" id="CPWD_INDV">
             <label htmlFor="confirm-password">Confirm Password</label>
             <input
-              onChange={(e) => setCPWD(e.target.value)}
+              onChange={(e) => {
+                setCPWD(e.target.value.trim());
+                confirmPassword({
+                  selector: null,
+                  password_selector: '#PWD_INDV',
+                  confirm_selector: '#CPWD_INDV',
+                });
+              }}
               value={confirm_password}
               type="password"
               id="confirm-password"
@@ -50,35 +72,41 @@ const LoginDetails = () => {
               placeholder="Confirm password"
               required
             />
+            <span>error msg</span>
           </div>
-          <div className="input-box number-box">
+          <div className="input-box number-box" id="NUM">
             <label htmlFor=" ">
               Phone Number
               <div>
                 <select
                   name="Country Code"
                   id="country-code"
-                  onChange={(e) => setCC(e.target.value)}
-                  defaultValue={'DEFAULT'}
+                  onChange={(e) => setCC(e.target.value.trim())}
+                  defaultValue={+234}
                 >
-                  <option value="DEFAULT" disabled>
-                    +234
-                  </option>
                   <option value={+234}>+234</option>
 
                   <option value={+234}>+44</option>
                   <option value={+234}>+233</option>
                 </select>
                 <input
-                  onChange={(e) => setNUM(e.target.value)}
+                  onChange={(e) => {
+                    setNUM(e.target.value.trim());
+                    personalEval({
+                      selector: '#NUM',
+                      name: 'Phone Number',
+                      num: true,
+                    });
+                  }}
                   value={number}
-                  type="number"
+                  type="text"
                   id="phone-number"
                   name="Phone Number"
                   placeholder="Enter your phone number"
                   required
                 />
               </div>
+              <span>error msg</span>
             </label>
           </div>
         </>

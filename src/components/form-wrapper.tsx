@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, navigate } from 'gatsby';
 import useNewContext from '@/context/context';
 import { BILProps, typeOption, formWrapper } from 'type';
+import { evaluate, validate } from './functions';
 
 const FormWrapper = ({
   children,
@@ -9,36 +10,57 @@ const FormWrapper = ({
   type,
   level,
   obj,
-  canG0,
+  evalProps,
 }: formWrapper) => {
-  const { setting, settingFinal, handleSubmit } = useNewContext();
-  
+  const { setting, settingFinal, handleRegister } = useNewContext();
+
   return (
     <form
       action=" "
       onSubmit={(e) => {
         e.preventDefault();
-        level === 2 && setting({ value2: obj });
-        handleSubmit(type);
-        // if (canG0 !== false) navigate(nextLink);
+        if (validate(evalProps!)) {
+          if (handleRegister(type)) navigate(nextLink);
+        } else {
+          evaluate(evalProps!);
+        }
       }}
     >
       {children}
       <div className={`steps ${level !== 3 ? 'center' : ''}`}>
         {level === 2 && (
-          <button type="submit" className="orange">
+          <button
+            type="submit"
+            className="orange"
+            onClick={() => {
+              if (validate(evalProps!)) {
+                setting({
+                  value2: obj,
+                });
+              } else {
+                evaluate(evalProps!);
+              }
+            }}
+          >
             VERIFY ACCOUNT
           </button>
         )}
-        {level !== 2 && (
+        {level === 1 && (
           <button
             type="button"
             className="orange"
             onClick={() => {
-              level === 1 && setting({ value1: obj });
+              if (validate(evalProps!)) {
+                navigate(nextLink);
+                setting({
+                  value1: obj,
+                });
+              } else {
+                evaluate(evalProps!);
+              }
             }}
           >
-            <Link to={nextLink!}>NEXT PAGE</Link>
+            NEXT PAGE
           </button>
         )}
       </div>

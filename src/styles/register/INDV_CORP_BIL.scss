@@ -13,10 +13,14 @@
       @include flex($justify: space-between);
       select {
         width: calc(20% - 10px);
+        border-color: $grey_lines !important;
       }
       input {
         width: calc(80% - 10px);
       }
+    }
+    span{
+      padding-left: calc(20% + 10px);
     }
   }
 }

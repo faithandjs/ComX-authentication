@@ -1,7 +1,5 @@
 import crypto from 'crypto';
-const CryptoJS = require("crypto-js");
-// import crypto from 'crypto-browserify';
-// const { createCipheriv, } = await import('node:crypto'); 
+
 interface constructor {
   key: any;
   vector: any;
@@ -10,17 +8,13 @@ export default class Manager {
   encrypt: (e: FormData) => any;
   decrypt: (e: any) => any;
   constructor({ key, vector }: constructor) {
-    // console.log(key,vector)
-    (this.encrypt = (formData) => {
-      console.log('key and vector', key,vector);
-      do_encrypt_data({ formData, key, vector });
-    }),
+    (this.encrypt = (formData) => do_encrypt_data({ formData, key, vector })),
       (this.decrypt = (data) => do_decrypt_data({ data, key, vector }));
   }
 }
 interface doEncryptData {
   key?: any; // t?: any;
-  vector?: any;// r?: any;
+  vector?: any; // r?: any;
   formData?: FormData;
 }
 interface doDecryptData {
@@ -29,7 +23,7 @@ interface doDecryptData {
   data?: any;
 }
 function do_encrypt_data({ key, vector, formData }: doEncryptData) {
-  console.log('data in encrypt', crypto);
+  // console.log('data in encrypt', crypto);
   function func(param: string) {
     let a = crypto.createCipheriv('aes-256-cbc', key, vector);
     return Buffer.concat([a.update(param), a.final()]).toString('base64');
@@ -48,7 +42,7 @@ function do_encrypt_data({ key, vector, formData }: doEncryptData) {
           : (key[r] = func(key[r].toString())));
     }
   else key = func(key.toString());
-  console.log('t in encrypt', key);
+  // console.log('t in encrypt', key);
   return key;
 }
 function do_decrypt_data({ key, vector, data }: doDecryptData) {
@@ -81,10 +75,3 @@ function do_decrypt_data({ key, vector, data }: doDecryptData) {
   else key = func(key.toString());
   return key;
 }
-
-var myString   = "blablabla Card game bla";
-var myPassword = "myPassword";
-
-
-var encrypted = CryptoJS.AES.encrypt(myString, myPassword);
-var decrypted = CryptoJS.AES.decrypt(encrypted, myPassword);

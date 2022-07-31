@@ -2,8 +2,9 @@ import BIL from '@/components/basic-info-layout';
 import { useState } from 'react';
 import FormWrapper from '@/components/form-wrapper';
 import { typeOption } from 'type';
+import { confirmPassword, personalEval } from '@/components/functions';
 
-const LoginDetails = () => { 
+const LoginDetails = () => {
   const [email, setE] = useState('');
   const [password, setPWD] = useState('');
   const [confirm_password, setCPWD] = useState('');
@@ -23,28 +24,53 @@ const LoginDetails = () => {
           company_phone: +2349012345600,
           referral_code: '',
         }}
-        canG0={
-          password === confirm_password && password.length > 1 ? true : false
-        }
+        evalProps={[
+          {
+            selector: '#EMAIL_CORP',
+            name: 'Company Email',
+          },
+          {
+            selector: '#PWD_CORP',
+            name: 'Password',
+          },
+          {
+            selector: null,
+            password_selector: '#PWD_CORP',
+            confirm_selector: '#CPWD_CORP',
+          },
+        ]}
       >
         <>
-          <div className="full-input-box input-box">
+          <div className="full-input-box input-box" id="EMAIL_CORP">
             <label htmlFor="company-email">Company Email</label>
             <input
-              onChange={(e) => setE(e.target.value)}
+              onChange={(e) => {
+                setE(e.target.value.trim());
+                personalEval({
+                  selector: '#EMAIL_CORP',
+                  name: 'Company Email',
+                });
+              }}
               value={email}
-              type="text"
+              type="email"
               id="company-email"
               name="Company Email"
               placeholder="Enter Email"
               required
             />
+            <span>error msg</span>
           </div>
 
-          <div className="full-input-box input-box">
+          <div className="full-input-box input-box" id="PWD_CORP">
             <label htmlFor="company-password">Password</label>
             <input
-              onChange={(e) => setPWD(e.target.value)}
+              onChange={(e) => {
+                setPWD(e.target.value.trim());
+                personalEval({
+                  selector: '#PWD_CORP',
+                  name: 'Password',
+                });
+              }}
               value={password}
               type="password"
               id="company-password"
@@ -52,18 +78,27 @@ const LoginDetails = () => {
               placeholder="Enter your password"
               required
             />
+            <span>error msg</span>
           </div>
-          <div className="full-input-box input-box">
+          <div className="full-input-box input-box" id="CPWD_CORP">
             <label htmlFor="confirm-company-password">Confirm Password</label>
             <input
-              onChange={(e) => setCPWD(e.target.value)}
+              onChange={(e) => {
+                setCPWD(e.target.value.trim());
+                confirmPassword({
+                  selector: null,
+                  password_selector: '#PWD_CORP',
+                  confirm_selector: '#CPWD_CORP',
+                });
+              }}
               value={confirm_password}
               type="password"
               id="confirm-company-password"
               name="Confirm Company Password"
-              placeholder="Confirm passwordd"
+              placeholder="Confirm password"
               required
             />
+            <span>error msg</span>
           </div>
         </>
       </FormWrapper>

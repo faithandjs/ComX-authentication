@@ -14,13 +14,21 @@ import {
   CORP_SF,
   set,
   typeOption,
+  signin,
 } from 'type';
-import { encrypt } from '../../encrypt';
+
+import Manager from '../../encryption';
 
 const newContext = createContext<any>(null);
 const { Provider } = newContext;
 
+const manager = new Manager({
+  key: process.env.GATSBY_KEY,
+  vector: process.env.GATSBY_VECTOR,
+});
+
 export const Context = ({ children }: layoutProps) => {
+  const [email, setEmail] = useState('');
   const [firstForm, setFF] = useState<INDV_FF | CORP_FF>();
   const [secondForm, setSF] = useState<INDV_SF | CORP_SF>();
   const [finalForm, setFinal] = useState<any>();
@@ -31,12 +39,7 @@ export const Context = ({ children }: layoutProps) => {
     if (value1) setFF(value1);
     if (value2) setSF(value2);
   };
-  const settingFinal = (key: typeOption) => {
-    console.log('set final');
-    if (key === typeOption.IND) {
-    } else {
-    }
-
+  function handleRegister(key: typeOption) {
     const URL =
       key === typeOption.CORP
         ? 'https://comx-sand-api.afexnigeria.com/api/corporate-client-register'
@@ -51,46 +54,15 @@ export const Context = ({ children }: layoutProps) => {
     form_data.append('phone', '+2348054643230');
     form_data.append('occupation', 'Farmer');
 
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      body: form_data,
-      redirect: 'follow',
-    };
-
-    fetch('https://git.heroku.com/arcane-wave-42929.git/' + URL, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => console.log('error', error));
-  };
-  function handleSubmit(key: typeOption) {
-    const URL =
-      key === typeOption.CORP
-        ? 'https://comx-sand-api.afexnigeria.com/api/corporate-client-register'
-        : 'https://comx-sand-api.afexnigeria.com/api/register';
-    let form_data = new FormData();
-    form_data.append('email', 'samkddfkkdwe@mailinator.com');
-    form_data.append('password', 'Password@1');
-    form_data.append('first_name', 'Test');
-    form_data.append('last_name', 'Test');
-    form_data.append('auth_type', 'password');
-    form_data.append('referral_code', '');
-    form_data.append('phone', '+2348054643230');
-    form_data.append('occupation', 'Farmer');
-
-    const data = encrypt(form_data);
-
-    return;
+    const data = manager.encrypt(form_data);
     const headers = new Headers();
-    headers.set('Content-Type', 'application/json');
-    headers.set(
-      'Authorization',
-      `Bearer ${
-        ''
-        // sessionStorage.getItem("user.auth.token") ?? context.user?.token
-      }`,
-    );
+    // headers.set('Content-Type', 'application/json');
+    // headers.set(
+    //   'Authorization',
+    //   `Bearer ${
+    //     // sessionStorage.getItem("user.auth.token") ?? context.user?.token
+    //   }`,
+    // );
 
     fetch(URL, {
       method: 'POST',
@@ -102,12 +74,111 @@ export const Context = ({ children }: layoutProps) => {
         // manager.decrypt(response); // impure decryption
         console.log(response); // something intelligible
       });
+    //onSuccess return true and go to next page else return false
+    return false;
   }
-  // console.log(manager, 'manager', process.env.GATSBY_KEY,  process.env.NODE_ENV);
-  // console.log(finalForm, firstForm, secondForm);
+  const handleSignin = ({ email, password }: signin) => {
+    const form_data = new FormData();
+    form_data.append('email', email);
+    form_data.append('password', password);
+    form_data.append('auth_type', 'password');
+
+    fetch('https://comx-sand-api.afexnigeria.com/api/login', {
+      method: 'POST',
+      body: form_data,
+      redirect: 'follow',
+    })
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+  };
+  const handleOTPRequest = (email: string) => {
+    setEmail(email);
+    const form_data = new FormData();
+    form_data.append('email', email);
+
+    fetch('https://comx-sand-api.afexnigeria.com/api/password-reset-request', {
+      method: 'POST',
+      body: form_data,
+      redirect: 'follow',
+    })
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+
+    return false;
+  };
+  const handleOTPValidation = (OTP: string) => {
+    const form_data = new FormData();
+    form_data.append('otp', OTP);
+
+    fetch('https://ecncomx-api.afexnigeria.com/api/otp/validate', {
+      method: 'POST',
+      body: form_data,
+      redirect: 'follow',
+    })
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+
+    return false;
+  };
+  const handlePasswordResetOTPValidation = (OTP: string) => {
+    const form_data = new FormData();
+    form_data.append('otp', OTP);
+    form_data.append('email', email);
+
+    fetch(
+      'https://comx-sand-api.afexnigeria.com/api/password-reset-otp-validation',
+      {
+        method: 'POST',
+        body: form_data,
+        redirect: 'follow',
+      },
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+
+    return false;
+  };
+  const handleResendOTP = (value: 'new' | 'old') => {
+    const newEmail = value === 'new' ? finalForm.email : email;
+
+    const form_data = new FormData();
+    form_data.append('email', newEmail);
+
+    fetch('https://ecncomx-api.afexnigeria.com/api/otp/resend', {
+      method: 'POST',
+      body: form_data,
+      redirect: 'follow',
+    })
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log('error', error));
+
+    return false;
+  };
+
   const value = useMemo(
-    () => ({ setting, settingFinal, URL, finalForm, handleSubmit }),
-    [],
+    () => ({
+      setting,
+      handleRegister,
+      handleSignin,
+      handleOTPRequest,
+      handleOTPValidation,
+      handleResendOTP,
+      handlePasswordResetOTPValidation,
+    }),
+    [
+      setting,
+      handleRegister,
+      handleSignin,
+      handleOTPRequest,
+      handleOTPValidation,
+      handleResendOTP,
+      handlePasswordResetOTPValidation,
+    ],
   );
   return <Provider value={value}>{children}</Provider>;
 };

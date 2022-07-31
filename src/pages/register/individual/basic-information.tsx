@@ -1,7 +1,7 @@
 import BIL from '@/components/basic-info-layout';
 import { typeOption } from 'type';
 import '../../../styles/register/INDV_CORP_BIL.scss';
-import { Link } from 'gatsby';
+import { personalEval } from '@/components/functions';
 import { useState } from 'react';
 import FormWrapper from '@/components/form-wrapper';
 //individual
@@ -9,7 +9,7 @@ const IdBasicInfo = () => {
   const [first_name, setF] = useState('');
   const [last_name, setL] = useState('');
   const [email, setE] = useState('');
-  console.log(first_name, last_name, email);
+
   return (
     <BIL type={typeOption.IND} level={1}>
       <FormWrapper
@@ -21,13 +21,33 @@ const IdBasicInfo = () => {
           email,
         }}
         nextLink="/register/individual/login-details"
+        evalProps={[
+          {
+            selector: '#FNAME',
+            name: 'First Name',
+          },
+          {
+            selector: '#LNAME',
+            name: 'Last Name',
+          },
+          {
+            selector: '#INDV_EMAIL',
+            name: 'First Name',
+          },
+        ]}
       >
         <>
           <div className="names">
-            <div className="half-input-box input-box">
+            <div className="half-input-box input-box" id="FNAME">
               <label htmlFor="first-name">Your First Name</label>
               <input
-                onChange={(e) => setF(e.target.value)}
+                onChange={(e) => {
+                  setF(e.target.value.trim());
+                  personalEval({
+                    selector: '#FNAME',
+                    name: 'First Name',
+                  });
+                }}
                 value={first_name}
                 type="text"
                 id="first-name"
@@ -35,11 +55,18 @@ const IdBasicInfo = () => {
                 placeholder="Enter your First Name"
                 required
               />
+              <span>error msg</span>
             </div>
-            <div className="half-input-box input-box">
+            <div className="half-input-box input-box" id="LNAME">
               <label htmlFor="last-name">Your Last Name</label>
               <input
-                onChange={(e) => setL(e.target.value)}
+                onChange={(e) => {
+                  setL(e.target.value.trim());
+                  personalEval({
+                    selector: '#LNAME',
+                    name: 'Last Name',
+                  });
+                }}
                 value={last_name}
                 type="text"
                 id="last-name"
@@ -47,12 +74,19 @@ const IdBasicInfo = () => {
                 placeholder="Enter your Last Name"
                 required
               />
+              <span>error msg</span>
             </div>
           </div>
-          <div className="full-input-box input-box">
+          <div className="full-input-box input-box" id="INDV_EMAIL">
             <label htmlFor="email">Your Email</label>
             <input
-              onChange={(e) => setE(e.target.value)}
+              onChange={(e) => {
+                setE(e.target.value.trim());
+                personalEval({
+                  selector: '#INDV_EMAIL',
+                  name: 'First Name',
+                });
+              }}
               value={email}
               type="email"
               id="email"
@@ -60,6 +94,7 @@ const IdBasicInfo = () => {
               placeholder="Enter your Email"
               required
             />
+            <span>error msg</span>
           </div>
         </>
       </FormWrapper>

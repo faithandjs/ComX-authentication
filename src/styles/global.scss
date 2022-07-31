@@ -50,3 +50,11 @@ a {
 .text3 {
   color: $grey;
 }
+.error {
+  input, select {
+    border-color: $error;
+  }
+  span {
+    opacity: 1;
+  }
+}

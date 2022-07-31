@@ -64,12 +64,16 @@
   label {
     display: block;
     padding: 9px 0;
-    font-size: .9rem;
+    font-size: 0.9rem;
+  }
+  span {
+    color: $error;
+    font-size: .75rem;
+    opacity: 0;
   }
 }
 .half-input-box {
   width: calc(50% - 10px);
 }
 .full-input-box {
-  
 }
