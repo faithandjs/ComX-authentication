@@ -13,7 +13,7 @@ const PasswordReset = () => {
         onSubmit={(e) => {
           e.preventDefault();
           if (personalEval(evalProps))
-            if (handleOTPRequest(email))
+            // if (handleOTPRequest(email))
               navigate('/sign-in/password-reset/otp-validation');
         }}
       >

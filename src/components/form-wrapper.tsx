@@ -20,7 +20,8 @@ const FormWrapper = ({
       onSubmit={(e) => {
         e.preventDefault();
         if (validate(evalProps!)) {
-          if (handleRegister(type)) navigate(nextLink);
+          // if (handleRegister(type))
+          navigate(nextLink);
         } else {
           evaluate(evalProps!);
         }

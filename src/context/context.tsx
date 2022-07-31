@@ -82,28 +82,34 @@ export const Context = ({ children }: layoutProps) => {
     form_data.append('email', email);
     form_data.append('password', password);
     form_data.append('auth_type', 'password');
-
+    //encrypt
     fetch('https://comx-sand-api.afexnigeria.com/api/login', {
       method: 'POST',
       body: form_data,
       redirect: 'follow',
     })
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        // manager.decrypt(response); // impure decryption
+        console.log(result);
+      })
       .catch((error) => console.log('error', error));
   };
   const handleOTPRequest = (email: string) => {
     setEmail(email);
     const form_data = new FormData();
     form_data.append('email', email);
-
+    //encrypt
     fetch('https://comx-sand-api.afexnigeria.com/api/password-reset-request', {
       method: 'POST',
       body: form_data,
       redirect: 'follow',
     })
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        // manager.decrypt(response); // impure decryption
+        console.log(result);
+      })
       .catch((error) => console.log('error', error));
 
     return false;
@@ -111,14 +117,17 @@ export const Context = ({ children }: layoutProps) => {
   const handleOTPValidation = (OTP: string) => {
     const form_data = new FormData();
     form_data.append('otp', OTP);
-
+    //encrypt
     fetch('https://ecncomx-api.afexnigeria.com/api/otp/validate', {
       method: 'POST',
       body: form_data,
       redirect: 'follow',
     })
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        // manager.decrypt(response); // impure decryption
+        console.log(result);
+      })
       .catch((error) => console.log('error', error));
 
     return false;
@@ -137,7 +146,10 @@ export const Context = ({ children }: layoutProps) => {
       },
     )
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        // manager.decrypt(response); // impure decryption
+        console.log(result);
+      })
       .catch((error) => console.log('error', error));
 
     return false;
@@ -147,16 +159,18 @@ export const Context = ({ children }: layoutProps) => {
 
     const form_data = new FormData();
     form_data.append('email', newEmail);
-
+    //encypt
     fetch('https://ecncomx-api.afexnigeria.com/api/otp/resend', {
       method: 'POST',
       body: form_data,
       redirect: 'follow',
     })
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        // manager.decrypt(response); // impure decryption
+        console.log(result);
+      })
       .catch((error) => console.log('error', error));
-
     return false;
   };
 

@@ -29,7 +29,7 @@ const Signin = () => {
           onSubmit={(e) => {
             e.preventDefault();
             if (validate(evalProps)) {
-              if (handleSignin({ email, password }))
+              // if (handleSignin({ email, password }))
                 navigate('/dashboard/market/order-book');
             } else {
               evaluate(evalProps);

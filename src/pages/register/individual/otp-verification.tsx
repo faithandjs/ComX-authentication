@@ -17,8 +17,8 @@ const OTP = () => {
         onSubmit={(e) => {
           e.preventDefault();
           if (personalEval(evalProps))
-            if (handleOTPValidation(OTP))
-              navigate('/register/individual/registration-successful');
+            // if (handleOTPValidation(OTP))
+            navigate('/register/individual/registration-successful');
         }}
       >
         <div className="input-box" id="INDV_OTP">

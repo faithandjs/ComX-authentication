@@ -16,11 +16,11 @@ const OtpValidation = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (personalEval(evalProps))
-            if (handlePasswordResetOTPValidation(OTP)) {
-              console.log('success');
-              navigate('/dashboard/market/order-book');
-            }
+          if (personalEval(evalProps)) {
+            // if (handlePasswordResetOTPValidation(OTP))
+            console.log('success');
+            navigate('/dashboard/market/order-book');
+          }
         }}
       >
         <div className="input-box" id="REC_OTP">

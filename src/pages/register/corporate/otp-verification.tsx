@@ -17,7 +17,7 @@ const OTP = () => {
         onSubmit={(e) => {
           e.preventDefault();
           if (personalEval(evalProps))
-            if (handleOTPValidation(OTP))
+            // if (handleOTPValidation(OTP))
               navigate('/register/corporate/registration-successful');
         }}
       >
